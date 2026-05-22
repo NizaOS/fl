@@ -8,7 +8,7 @@
 body{
 margin:0;
 overflow:hidden;
-background:#050505;
+background:#000;
 font-family:arial;
 }
 #u{
@@ -16,50 +16,33 @@ position:absolute;
 top:20px;
 left:20px;
 color:#fff;
-z-index:5;
-width:320px;
-backdrop-filter:blur(8px);
+z-index:10;
+width:300px;
 background:rgba(255,255,255,.08);
-padding:18px;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.15);
+padding:16px;
+border-radius:16px;
+backdrop-filter:blur(6px);
 }
 #u h1{
 margin:0 0 10px;
-font-size:30px;
+font-size:28px;
 }
 #u p{
-line-height:1.5;
 font-size:14px;
-opacity:.9;
+line-height:1.5;
 }
 #b{
-margin-top:12px;
 display:flex;
 gap:10px;
 flex-wrap:wrap;
+margin-top:10px;
 }
 button{
-background:#fff;
-color:#000;
 border:none;
 padding:10px 14px;
 border-radius:999px;
 cursor:pointer;
 font-size:12px;
-text-transform:lowercase;
-}
-#i{
-position:absolute;
-bottom:20px;
-right:20px;
-color:#fff;
-z-index:5;
-background:rgba(255,255,255,.08);
-padding:12px;
-border-radius:14px;
-font-size:13px;
-backdrop-filter:blur(8px);
 }
 canvas{
 display:block;
@@ -69,17 +52,17 @@ display:block;
 <body>
 <div id="u">
 <h1>fun life hub</h1>
-<p>lif can be more fun with music, art, games and random tiny momments that make pepole smile every day.</p>
-<p>explorre the glowing world, spin cool shaps, watch stars move and enjoy the craazy happy vibez all arond you.</p>
+<p>explorre glowing worlds with giant shaps and neon stars flying arond the dark skyy.</p>
+<p>this craazy place has moving objects, spin effects and cool texturs everywherre.</p>
 <div id="b">
 <button id="a">spin mod</button>
 <button id="c">dark sky</button>
-<button id="d">crazy zoom</button>
+<button id="d">zoom mod</button>
 <button id="e">move shaps</button>
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.164/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
 <script>
 let s=new THREE.Scene()
 let c=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000)
@@ -87,18 +70,17 @@ let r=new THREE.WebGLRenderer({antialias:true})
 r.setSize(window.innerWidth,window.innerHeight)
 document.body.appendChild(r.domElement)
 
-let a=new THREE.AmbientLight(0xffffff,.8)
+let a=new THREE.AmbientLight(0xffffff,.7)
 s.add(a)
 
 let l=new THREE.PointLight(0xffffff,2)
 l.position.set(5,5,5)
 s.add(l)
 
-let o=new THREE.TextureLoader()
-let tx=o.load('https://threejs.org/examples/textures/brick_diffuse.jpg')
+let t=new THREE.TextureLoader().load('https://threejs.org/examples/textures/brick_diffuse.jpg')
 
 let g1=new THREE.BoxGeometry(3,3,3)
-let m1=new THREE.MeshStandardMaterial({map:tx})
+let m1=new THREE.MeshStandardMaterial({map:t})
 let q=new THREE.Mesh(g1,m1)
 q.position.x=-5
 s.add(q)
@@ -128,7 +110,8 @@ ar.push((Math.random()-.5)*100)
 ar.push((Math.random()-.5)*100)
 }
 st.setAttribute('position',new THREE.Float32BufferAttribute(ar,3))
-let sm=new THREE.PointsMaterial({color:0xffffff,size:.2})
+
+let sm=new THREE.PointsMaterial({color:0xffffff,size:.15})
 let sp=new THREE.Points(st,sm)
 s.add(sp)
 
@@ -169,25 +152,20 @@ c.position.z+=(z-c.position.z)*.05
 
 q.rotation.x+=.01
 q.rotation.y+=.01
-
 w.rotation.y+=.01
 
-if(f){
-e.rotation.x+=.08
-e.rotation.y+=.08
-}else{
-e.rotation.x+=.01
-e.rotation.y+=.01
-}
+e.rotation.x+=f?.08:.01
+
+e.rotation.y+=f?.08:.01
+
+y.rotation.y+=.02
+sp.rotation.y+=.001
 
 if(mv){
 q.position.y=Math.sin(Date.now()*.002)*2
 w.position.y=Math.cos(Date.now()*.002)*2
 e.position.y=Math.sin(Date.now()*.003)*2
 }
-
-y.rotation.y+=.02
-sp.rotation.y+=.0008
 
 r.render(s,c)
 }
