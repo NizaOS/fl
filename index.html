@@ -3,212 +3,191 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>music city</title>
+<title>fun life hub</title>
 <style>
 body{
 margin:0;
 overflow:hidden;
-background:#000;
+background:#050505;
 font-family:arial;
-}
-canvas{
-display:block;
 }
 #u{
 position:absolute;
 top:20px;
 left:20px;
-width:320px;
-padding:18px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-border-radius:20px;
 color:#fff;
 z-index:5;
+width:320px;
+backdrop-filter:blur(8px);
+background:rgba(255,255,255,.08);
+padding:18px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,.15);
 }
 #u h1{
-margin:0;
-font-size:32px;
+margin:0 0 10px;
+font-size:30px;
 }
 #u p{
-font-size:14px;
 line-height:1.5;
+font-size:14px;
 opacity:.9;
 }
-#x{
+#b{
+margin-top:12px;
 display:flex;
 gap:10px;
 flex-wrap:wrap;
-margin-top:10px;
 }
 button{
-padding:10px 14px;
-border:none;
-border-radius:999px;
 background:#fff;
 color:#000;
-font-size:12px;
+border:none;
+padding:10px 14px;
+border-radius:999px;
 cursor:pointer;
+font-size:12px;
 text-transform:lowercase;
 }
-#f{
+#i{
 position:absolute;
 bottom:20px;
 right:20px;
-background:rgba(255,255,255,.08);
 color:#fff;
-padding:12px;
-border-radius:16px;
-backdrop-filter:blur(10px);
 z-index:5;
+background:rgba(255,255,255,.08);
+padding:12px;
+border-radius:14px;
 font-size:13px;
+backdrop-filter:blur(8px);
+}
+canvas{
+display:block;
 }
 </style>
 </head>
 <body>
 <div id="u">
-<h1>music city vibez</h1>
-<p>walk thru glowing towers while loud beetz and happy lights make the nite feel more alive and wild.</p>
-<p>the futur town is full of colord cubes, flyng rings and shiny stars that move arond your screeen.</p>
-<div id="x">
-<button id="a">spin fast</button>
-<button id="b">pink mode</button>
-<button id="c">zoom city</button>
-<button id="d">float shaps</button>
+<h1>fun life hub</h1>
+<p>lif can be more fun with music, art, games and random tiny momments that make pepole smile every day.</p>
+<p>explorre the glowing world, spin cool shaps, watch stars move and enjoy the craazy happy vibez all arond you.</p>
+<div id="b">
+<button id="a">spin mod</button>
+<button id="c">dark sky</button>
+<button id="d">crazy zoom</button>
+<button id="e">move shaps</button>
 </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.164/build/three.min.js"></script>
 <script>
 let s=new THREE.Scene()
-let c=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,.1,1000)
+let c=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,.1,1000)
 let r=new THREE.WebGLRenderer({antialias:true})
-r.setSize(innerWidth,innerHeight)
+r.setSize(window.innerWidth,window.innerHeight)
 document.body.appendChild(r.domElement)
 
-let a=new THREE.AmbientLight(0xffffff,.7)
+let a=new THREE.AmbientLight(0xffffff,.8)
 s.add(a)
 
-let l=new THREE.PointLight(0xff00ff,3)
-l.position.set(10,12,10)
+let l=new THREE.PointLight(0xffffff,2)
+l.position.set(5,5,5)
 s.add(l)
 
-let t=new THREE.TextureLoader().load('https://threejs.org/examples/textures/uv_grid_opengl.jpg')
+let o=new THREE.TextureLoader()
+let tx=o.load('https://threejs.org/examples/textures/brick_diffuse.jpg')
 
-let g=new THREE.PlaneGeometry(80,80)
-let m=new THREE.MeshStandardMaterial({color:0x111111,side:THREE.DoubleSide})
-let p=new THREE.Mesh(g,m)
-p.rotation.x=-Math.PI/2
-p.position.y=-4
-s.add(p)
-
-let z=[]
-for(let i=0;i<25;i++){
-let g1=new THREE.BoxGeometry(2,Math.random()*8+2,2)
-let m1=new THREE.MeshStandardMaterial({map:t})
-let b1=new THREE.Mesh(g1,m1)
-b1.position.set((Math.random()-.5)*40,0,(Math.random()-.5)*40)
-b1.position.y=g1.parameters.height/2-4
-s.add(b1)
-z.push(b1)
-}
-
-let g2=new THREE.SphereGeometry(2,32,32)
-let m2=new THREE.MeshStandardMaterial({color:0x00ffff,emissive:0x003333})
-let q=new THREE.Mesh(g2,m2)
-q.position.set(0,4,0)
+let g1=new THREE.BoxGeometry(3,3,3)
+let m1=new THREE.MeshStandardMaterial({map:tx})
+let q=new THREE.Mesh(g1,m1)
+q.position.x=-5
 s.add(q)
 
-let g3=new THREE.TorusGeometry(3,.7,30,100)
-let m3=new THREE.MeshStandardMaterial({color:0xff8800})
-let w=new THREE.Mesh(g3,m3)
-w.position.set(-8,5,-5)
+let g2=new THREE.SphereGeometry(2,32,32)
+let m2=new THREE.MeshStandardMaterial({color:0xff00ff})
+let w=new THREE.Mesh(g2,m2)
 s.add(w)
 
-let g4=new THREE.ConeGeometry(2,5,6)
-let m4=new THREE.MeshStandardMaterial({color:0xffff00})
-let e=new THREE.Mesh(g4,m4)
-e.position.set(8,3,-4)
+let g3=new THREE.TorusKnotGeometry(1.5,.5,100,16)
+let m3=new THREE.MeshStandardMaterial({color:0x00ffff})
+let e=new THREE.Mesh(g3,m3)
+e.position.x=5
 s.add(e)
 
-let g5=new THREE.TorusKnotGeometry(1.8,.5,120,16)
-let m5=new THREE.MeshStandardMaterial({color:0xff00ff})
-let y=new THREE.Mesh(g5,m5)
-y.position.set(0,8,-10)
+let g4=new THREE.ConeGeometry(2,4,32)
+let m4=new THREE.MeshStandardMaterial({color:0xffff00})
+let y=new THREE.Mesh(g4,m4)
+y.position.set(0,-4,0)
 s.add(y)
 
 let st=new THREE.BufferGeometry()
 let ar=[]
-for(let i=0;i<2000;i++){
-ar.push((Math.random()-.5)*200)
-ar.push((Math.random()-.5)*200)
-ar.push((Math.random()-.5)*200)
+for(let i=0;i<1000;i++){
+ar.push((Math.random()-.5)*100)
+ar.push((Math.random()-.5)*100)
+ar.push((Math.random()-.5)*100)
 }
 st.setAttribute('position',new THREE.Float32BufferAttribute(ar,3))
 let sm=new THREE.PointsMaterial({color:0xffffff,size:.2})
 let sp=new THREE.Points(st,sm)
 s.add(sp)
 
-c.position.z=25
-c.position.y=8
+c.position.z=12
 
 let f=0
-let h=0
-let j=25
-let k=0
+let mv=0
+let z=12
+let bg=0
 
 document.getElementById('a').onclick=()=>{
 f=!f
 }
 
-document.getElementById('b').onclick=()=>{
-h=!h
-s.background=new THREE.Color(h?0x220022:0x000000)
-}
-
 document.getElementById('c').onclick=()=>{
-j=j===25?12:25
+bg=!bg
+s.background=new THREE.Color(bg?0x220022:0x000000)
 }
 
 document.getElementById('d').onclick=()=>{
-k=!k
+z=z===12?7:12
+}
+
+document.getElementById('e').onclick=()=>{
+mv=!mv
 }
 
 window.addEventListener('resize',()=>{
-c.aspect=innerWidth/innerHeight
+c.aspect=window.innerWidth/window.innerHeight
 c.updateProjectionMatrix()
-r.setSize(innerWidth,innerHeight)
+r.setSize(window.innerWidth,window.innerHeight)
 })
 
 function n(){
 requestAnimationFrame(n)
 
-c.position.z+=(j-c.position.z)*.04
-c.lookAt(0,0,0)
+c.position.z+=(z-c.position.z)*.05
 
-q.rotation.y+=.02
-w.rotation.x+=f?.08:.01
-w.rotation.y+=f?.08:.01
+q.rotation.x+=.01
+q.rotation.y+=.01
 
-e.rotation.y+=.02
-y.rotation.x+=.02
-y.rotation.y+=.02
+w.rotation.y+=.01
 
-if(k){
-q.position.y=4+Math.sin(Date.now()*.002)*2
-w.position.y=5+Math.cos(Date.now()*.002)*2
-
-e.position.y=3+Math.sin(Date.now()*.003)*2
+if(f){
+e.rotation.x+=.08
+e.rotation.y+=.08
+}else{
+e.rotation.x+=.01
+e.rotation.y+=.01
 }
 
-sp.rotation.y+=.0007
+if(mv){
+q.position.y=Math.sin(Date.now()*.002)*2
+w.position.y=Math.cos(Date.now()*.002)*2
+e.position.y=Math.sin(Date.now()*.003)*2
+}
 
-z.forEach(i=>{
-i.rotation.y+=.002
-})
-
-l.position.x=Math.sin(Date.now()*.001)*20
-l.position.z=Math.cos(Date.now()*.001)*20
+y.rotation.y+=.02
+sp.rotation.y+=.0008
 
 r.render(s,c)
 }
